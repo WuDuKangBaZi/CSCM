@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="csdpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="authority">
+          <Key>
+            <PropertyRef Name="MACID" />
+          </Key>
+          <Property Name="MACID" Type="nvarchar" MaxLength="254" Nullable="false" />
+          <Property Name="useName" Type="nvarchar" MaxLength="254" />
+        </EntityType>
+        <EntityType Name="cscm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Version" Type="nvarchar" MaxLength="255" />
+          <Property Name="author" Type="nvarchar" MaxLength="255" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="cscmVersion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="message0" Type="nvarchar" MaxLength="255" />
+          <Property Name="args0" Type="text" />
+          <Property Name="taskVersion" Type="nvarchar" MaxLength="255" />
+          <Property Name="serverPath" Type="nvarchar" MaxLength="255" />
+          <Property Name="taskId" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="csdpModelStoreContainer">
+          <EntitySet Name="authority" EntityType="Self.authority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cscm" EntityType="Self.cscm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cscmVersion" EntityType="Self.cscmVersion" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="csdpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cscm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="author" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="cscmVersion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="message0" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="args0" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="taskVersion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="serverPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="taskId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="csdpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cscm" EntityType="Self.cscm" />
+          <EntitySet Name="cscmVersion" EntityType="Self.cscmVersion" />
+          <EntitySet Name="authority" EntityType="csdpModel.authority" />
+        </EntityContainer>
+        <EntityType Name="authority">
+          <Key>
+            <PropertyRef Name="MACID" />
+          </Key>
+          <Property Name="MACID" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="useName" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="csdpModelStoreContainer" CdmEntityContainer="csdpEntities">
+          <EntitySetMapping Name="cscm">
+            <EntityTypeMapping TypeName="csdpModel.cscm">
+              <MappingFragment StoreEntitySet="cscm">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cscmVersion">
+            <EntityTypeMapping TypeName="csdpModel.cscmVersion">
+              <MappingFragment StoreEntitySet="cscmVersion">
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="serverPath" ColumnName="serverPath" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message0" ColumnName="message0" />
+                <ScalarProperty Name="args0" ColumnName="args0" />
+                <ScalarProperty Name="taskVersion" ColumnName="taskVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="authority">
+            <EntityTypeMapping TypeName="csdpModel.authority">
+              <MappingFragment StoreEntitySet="authority">
+                <ScalarProperty Name="useName" ColumnName="useName" />
+                <ScalarProperty Name="MACID" ColumnName="MACID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,134 @@
+﻿<mah:MetroWindow x:Class="CSCM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSCM"
+        mc:Ignorable="d"
+        Title="CSCM" Height="768" Width="1366"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                 Background="{DynamicResource MaterialDesignPaper}" Loaded="MetroWindow_Loaded">
+    <Grid>
+        <TabControl
+  VerticalContentAlignment="Top"
+  Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+  materialDesign:ColorZoneAssist.Mode="Standard">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+        Height="auto"
+        Width="auto">
+                        <materialDesign:PackIcon
+          Kind="ApplicationBracketsOutline"
+          Width="24"
+          Height="24"
+          HorizontalAlignment="Center" />
+                        <TextBlock
+          Text="自建组件"
+          HorizontalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid Background="AliceBlue">
+                    <StackPanel>
+                        <Border  BorderThickness="0,0,0,1" BorderBrush="Black"  CornerRadius="3" VerticalAlignment="Top">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Width="auto" Orientation="Horizontal">
+                                    <Button x:Name="errorAuther"
+  Content="{materialDesign:PackIcon AccessPointRemove}"
+  ToolTip="未识别的特征码" Visibility="Visible"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Red" FontSize="36" Click="Button_Click" />
+                                    <Button x:Name="findAuther"
+  Content="{materialDesign:PackIcon AccessPoint}"
+  ToolTip="已识别" Visibility="Collapsed"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF03FF12" FontSize="36" />
+                                    <Button x:Name="refreshFile"
+  Content="{materialDesign:PackIcon ArchiveRefresh}"
+  ToolTip="刷新本地目录到数据库内" Visibility="Visible"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF1ADAF3" FontSize="36" Click="refreshFile_Click" />
+                                </StackPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3" Style="{StaticResource MaterialDesignButtonTextBlock }">关键词:</TextBlock>
+                                <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="265" Cursor="IBeam" Margin="3" Style="{DynamicResource MaterialDesignTextBoxBase}" />
+                                <Button Height="30" Width="65" Margin="3" Style="{DynamicResource MahApps.Styles.Button}" Click="Button_Click_1">
+                                    搜索
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                        <DataGrid Height="100" x:Name="cscmList"/>
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+        Height="auto"
+        Width="auto">
+                        <materialDesign:PackIcon
+          Kind="ClockOutline"
+          Width="24"
+          Height="24"
+          HorizontalAlignment="Center" />
+                        <TextBlock
+          Text="Recent"
+          HorizontalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+      <Run
+        Text="tab 2 content. Default look and behaviors." />
+      <LineBreak />
+      <LineBreak />
+      <Run
+        FontStyle="Italic">
+      Praesent sed dui arcu. Vivamus porta auctor sagittis
+    </Run>
+                </TextBlock>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+        Height="auto"
+        Width="auto">
+                        <materialDesign:PackIcon
+          Kind="Images"
+          Width="24"
+          Height="24"
+          HorizontalAlignment="Center" />
+                        <TextBlock
+          Text="Photos"
+          HorizontalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+      <Run
+        Text="tab 3 content. Default look and behaviors." />
+      <LineBreak />
+      <LineBreak />
+                </TextBlock>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+        Height="auto"
+        Width="auto">
+                        <materialDesign:PackIcon
+          Kind="MusicBoxMultiple"
+          Width="24"
+          Height="24"
+          HorizontalAlignment="Center" />
+                        <TextBlock
+          Text="Sounds"
+          HorizontalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+      <Run
+        Text="tab 4 content. Default look and behaviors." />
+      <LineBreak />
+      <LineBreak />
+                </TextBlock>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</mah:MetroWindow>
