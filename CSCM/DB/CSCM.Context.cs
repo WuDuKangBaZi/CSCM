@@ -26,8 +26,9 @@ namespace CSCM.DB
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<cscm> cscm { get; set; }
         public virtual DbSet<cscmVersion> cscmVersion { get; set; }
         public virtual DbSet<authority> authority { get; set; }
+        public virtual DbSet<CSCMDependencies> CSCMDependencies { get; set; }
+        public virtual DbSet<CSCMPackage> CSCMPackage { get; set; }
     }
 }

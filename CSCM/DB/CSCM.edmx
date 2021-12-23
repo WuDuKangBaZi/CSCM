@@ -12,15 +12,33 @@
           <Property Name="MACID" Type="nvarchar" MaxLength="254" Nullable="false" />
           <Property Name="useName" Type="nvarchar" MaxLength="254" />
         </EntityType>
-        <EntityType Name="cscm">
+        <EntityType Name="CSCMDependencies">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="255" />
-          <Property Name="Version" Type="nvarchar" MaxLength="255" />
-          <Property Name="author" Type="nvarchar" MaxLength="255" />
-          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="packageId" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="version" Type="nvarchar" MaxLength="20" />
+          <Property Name="type" Type="nvarchar" MaxLength="20" />
+          <Property Name="state" Type="nvarchar" MaxLength="20" />
+          <Property Name="descriptioin" Type="nvarchar(max)" />
+          <Property Name="message0" Type="nvarchar(max)" />
+          <Property Name="componentType" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastModifyTime" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CSCMPackage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="version" Type="nvarchar" MaxLength="120" />
+          <Property Name="introduction" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="lastModifyTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="registry" Type="nvarchar" MaxLength="200" />
+          <Property Name="auth" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="cscmVersion">
           <Key>
@@ -28,45 +46,37 @@
           </Key>
           <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="message0" Type="nvarchar" MaxLength="255" />
-          <Property Name="args0" Type="text" />
+          <Property Name="args0" Type="nvarchar(max)" />
           <Property Name="taskVersion" Type="nvarchar" MaxLength="255" />
           <Property Name="serverPath" Type="nvarchar" MaxLength="255" />
           <Property Name="taskId" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityContainer Name="csdpModelStoreContainer">
           <EntitySet Name="authority" EntityType="Self.authority" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="cscm" EntityType="Self.cscm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CSCMDependencies" EntityType="Self.CSCMDependencies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CSCMPackage" EntityType="Self.CSCMPackage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cscmVersion" EntityType="Self.cscmVersion" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="csdpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="cscm">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Version" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="author" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="cscmVersion">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="message0" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="args0" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="args0" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="taskVersion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="serverPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="taskId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="csdpEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cscm" EntityType="Self.cscm" />
           <EntitySet Name="cscmVersion" EntityType="Self.cscmVersion" />
           <EntitySet Name="authority" EntityType="csdpModel.authority" />
+          <EntitySet Name="CSCMDependencies" EntityType="csdpModel.CSCMDependencies" />
+          <EntitySet Name="CSCMPackage" EntityType="csdpModel.CSCMPackage" />
         </EntityContainer>
         <EntityType Name="authority">
           <Key>
@@ -75,23 +85,40 @@
           <Property Name="MACID" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
           <Property Name="useName" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="CSCMDependencies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="packageId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="version" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="descriptioin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="message0" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="componentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastModifyTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CSCMPackage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="version" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="introduction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="lastModifyTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="registry" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="auth" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="csdpModelStoreContainer" CdmEntityContainer="csdpEntities">
-          <EntitySetMapping Name="cscm">
-            <EntityTypeMapping TypeName="csdpModel.cscm">
-              <MappingFragment StoreEntitySet="cscm">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="author" ColumnName="author" />
-                <ScalarProperty Name="description" ColumnName="description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="cscmVersion">
             <EntityTypeMapping TypeName="csdpModel.cscmVersion">
               <MappingFragment StoreEntitySet="cscmVersion">
@@ -109,6 +136,36 @@
               <MappingFragment StoreEntitySet="authority">
                 <ScalarProperty Name="useName" ColumnName="useName" />
                 <ScalarProperty Name="MACID" ColumnName="MACID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSCMDependencies">
+            <EntityTypeMapping TypeName="csdpModel.CSCMDependencies">
+              <MappingFragment StoreEntitySet="CSCMDependencies">
+                <ScalarProperty Name="lastModifyTime" ColumnName="lastModifyTime" />
+                <ScalarProperty Name="componentType" ColumnName="componentType" />
+                <ScalarProperty Name="message0" ColumnName="message0" />
+                <ScalarProperty Name="descriptioin" ColumnName="descriptioin" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="packageId" ColumnName="packageId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSCMPackage">
+            <EntityTypeMapping TypeName="csdpModel.CSCMPackage">
+              <MappingFragment StoreEntitySet="CSCMPackage">
+                <ScalarProperty Name="auth" ColumnName="auth" />
+                <ScalarProperty Name="registry" ColumnName="registry" />
+                <ScalarProperty Name="lastModifyTime" ColumnName="lastModifyTime" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="introduction" ColumnName="introduction" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

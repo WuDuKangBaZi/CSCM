@@ -12,12 +12,17 @@ namespace CSCM.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class cscm
+    public partial class CSCMDependencies
     {
-        public string ID { get; set; }
-        public string Name { get; set; }
-        public string Version { get; set; }
-        public string author { get; set; }
-        public string description { get; set; }
+        public string id { get; set; }
+        public string packageId { get; set; }
+        public string name { get; set; }
+        public string version { get; set; }
+        public string type { get; set; }
+        public string state { get; set; }
+        public string descriptioin { get; set; }
+        public string message0 { get; set; }
+        public string componentType { get; set; }
+        public string lastModifyTime { get; set; }
     }
 }

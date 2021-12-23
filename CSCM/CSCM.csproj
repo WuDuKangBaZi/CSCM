@@ -90,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Util\refreshCSCM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,9 +107,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CSCM.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\cscm.cs">
-      <DependentUpon>CSCM.tt</DependentUpon>
-    </Compile>
     <Compile Include="DB\CSCM.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -117,6 +115,12 @@
     <Compile Include="DB\CSCM1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>CSCM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\CSCMDependencies.cs">
+      <DependentUpon>CSCM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\CSCMPackage.cs">
       <DependentUpon>CSCM.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\cscmVersion.cs">
