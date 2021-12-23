@@ -1,4 +1,5 @@
 ﻿using CSCM.DB;
+using CSCM.userControl;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Newtonsoft.Json;
@@ -248,7 +249,7 @@ namespace CSCM
 
         private void cscmList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            FirstFlyout.IsOpen = true;
+            
             if(cscmList.SelectedItem == null)
             {
 
@@ -258,7 +259,14 @@ namespace CSCM
                 CSCMPackage package = (CSCMPackage)cscmList.SelectedItem;
                 //Debug.WriteLine((cscmList.SelectedItem as CSCMPackage).id);
                 FirstFlyout.Header = package.name;
-                
+
+                /*cscmPackageInfo packageInfo = new cscmPackageInfo();
+                packageInfo.packageId = package.id;*/
+                cscmInfo.packageId = package.id;
+                cscmInfo.loadData();
+                FirstFlyout.IsOpen = true;
+
+
             }
             
         }

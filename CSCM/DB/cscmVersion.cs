@@ -20,5 +20,6 @@ namespace CSCM.DB
         public string taskVersion { get; set; }
         public string serverPath { get; set; }
         public string taskId { get; set; }
+
     }
 }

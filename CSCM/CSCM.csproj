@@ -90,6 +90,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\cscmProperty.cs" />
+    <Compile Include="userControl\cscmPackageInfo.xaml.cs">
+      <DependentUpon>cscmPackageInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="userControl\xamlTemplate\card.xaml.cs">
+      <DependentUpon>card.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Util\refreshCSCM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -130,6 +137,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="userControl\cscmPackageInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="userControl\xamlTemplate\card.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

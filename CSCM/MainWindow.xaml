@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:CSCM"
         mc:Ignorable="d"
         Title="CSCM" Height="768" Width="1366"
-        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:usercontrol="clr-namespace:CSCM.userControl"
                  Background="{DynamicResource MaterialDesignPaper}" Loaded="MetroWindow_Loaded">
     <mah:MetroWindow.Flyouts>
         <mah:FlyoutsControl>
-            <mah:Flyout x:Name="FirstFlyout" Header="Settings" Position="Right" Width="250">
-                <!-- The content goes here -->
+            <mah:Flyout x:Name="FirstFlyout" Header="Settings" Position="Right" Width="800" Background="DimGray">
+                <usercontrol:cscmPackageInfo x:Name="cscmInfo" Background="DimGray"/>
             </mah:Flyout>
 
             <mah:Flyout Header="About" IsOpen="{Binding IsAboutFlyoutOpen}" Position="Right" Width="300">
