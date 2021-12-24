@@ -15,12 +15,12 @@ namespace CSCM
     /// </summary>
     public partial class App : Application
     {
-        /*static App()
+        static App()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += OnResolveAssembly;
+           /* AppDomain.CurrentDomain.AssemblyResolve += OnResolveAssembly;*/
         }
 
-        private static Assembly OnResolveAssembly(object sender, ResolveEventArgs args)
+       /* private static Assembly OnResolveAssembly(object sender, ResolveEventArgs args)
         {
             var executingAssembly = Assembly.GetExecutingAssembly();
             var assemblyName = new AssemblyName(args.Name);

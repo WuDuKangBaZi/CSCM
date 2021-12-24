@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CSCM.userControl.cscmPackageInfo"
+﻿<UserControl x:Name="userControl" x:Class="CSCM.userControl.cscmPackageInfo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,11 +6,13 @@
              xmlns:local="clr-namespace:CSCM.userControl" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
               Loaded="UserControl_Loaded">
-    <Grid x:Name="grid" Height="auto">
+    <Grid x:Name="grid" Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
         <materialDesign:Card>
-            <StackPanel x:Name="cscmInfoStack" Height="{Binding ActualHeight, ElementName=grid, Mode=OneWay}" >
-
-            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                <WrapPanel >
+                    <StackPanel x:Name="cscmInfoStack"/>
+                </WrapPanel>
+            </ScrollViewer>
         </materialDesign:Card>
     </Grid>
 </UserControl>

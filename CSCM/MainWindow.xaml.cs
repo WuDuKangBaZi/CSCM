@@ -23,6 +23,7 @@ namespace CSCM
     {
         private static string auth = "";
         private static bool refarchStatus = true;
+        private static bool searchPackage = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -40,9 +41,11 @@ namespace CSCM
             authority au = csdp.authority.Find(mac.Replace("-", ""));
             if (au == null)
             {
-                refreshFile.IsEnabled = false;
+               // refreshFile.IsEnabled = false;
                 errorAuther.Visibility = Visibility.Visible;
                 findAuther.Visibility = Visibility.Collapsed;
+                // searchData.IsEnabled = false;
+                macBox.Text = mac.Replace("-", "");
             }
             else
             {
@@ -50,6 +53,7 @@ namespace CSCM
                 errorAuther.Visibility = Visibility.Collapsed;
                 findAuther.Visibility = Visibility.Visible;
                 //refreshFile.IsEnabled = false;
+                //searchData.IsEnabled = true;
                 //macId.Text = $"你的MAC地址是:{mac.Replace("-","")},没有登记备注，无法同步你的自建组件，请将你的MAC地址发给 邦桑迪 添加到数据库中后";
             }
 
@@ -93,6 +97,7 @@ namespace CSCM
         }
         private async void reface(string auth)
         {
+            await this.ShowMessageAsync("更新中", "后台正在更新，请不要再次点击图标，更新完成后会提示!");
             await Task.Run(() =>
             {
                 //refreshFile.IsEnabled = false;
@@ -231,34 +236,83 @@ namespace CSCM
 
         private void searchData_Click(object sender, RoutedEventArgs e)
         {
-            using (csdpEntities csdp = new csdpEntities())
+            if (findFrom.IsChecked == true)
             {
-                var dataList = csdp.CSCMPackage.Where(p => p.name.Contains(searchKey.Text)).ToList();
-                cscmList.ItemsSource = dataList;
-                cscmList.Columns[0].Visibility = Visibility.Collapsed;
-                cscmList.Columns[1].Header = "组件包名称";
-                cscmList.Columns[2].Header = "组件包版本号";
-                cscmList.Columns[3].Header = "组件包简介";
-                cscmList.Columns[4].Header = "组件包描述";
-                cscmList.Columns[5].Header = "最后修改时间";
-                cscmList.Columns[6].Header = "发布渠道";
-                cscmList.Columns[7].Header = "作者";
+                searchPackage = false;
+
+
+                using (csdpEntities csdp = new csdpEntities())
+                {
+                    var dataList = csdp.CSCMDependencies.Where(p => p.name.Contains(searchKey.Text) 
+                    || p.descriptioin.Contains(searchKey.Text)
+                    || p.message0.Contains(searchKey.Text)).ToList();
+                    cscmList.ItemsSource = dataList;
+                    cscmList.Columns[0].Visibility = Visibility.Collapsed;
+                    cscmList.Columns[1].Visibility = Visibility.Collapsed;
+                    cscmList.Columns[2].Header = "组件名称";
+                    cscmList.Columns[3].Header = "最新版本号";
+                    cscmList.Columns[4].Visibility = Visibility.Collapsed;
+                    cscmList.Columns[5].Visibility = Visibility.Collapsed;
+                    cscmList.Columns[6].Header = "帮助信息";
+                    cscmList.Columns[6].Width = 375;
+                    cscmList.Columns[7].Header = "组件描述信息";
+                    cscmList.Columns[7].Width = 375;
+                    cscmList.Columns[8].Header = "组件类型";
+                    cscmList.Columns[8].Visibility = Visibility.Collapsed;
+                    cscmList.Columns[9].Header = "最后修改时间";
+                }
+            }
+            else
+            {
+                using (csdpEntities csdp = new csdpEntities())
+                {
+                    searchPackage = true;
+                    var dataList = csdp.CSCMPackage.Where(p => p.name.Contains(searchKey.Text) ||
+                    p.introduction.Contains(searchKey.Text) ||
+                    p.description.Contains(searchKey.Text)
+                    ).ToList();
+                    cscmList.ItemsSource = dataList;
+                    cscmList.Columns[0].Visibility = Visibility.Collapsed;
+                    cscmList.Columns[1].Header = "组件包名称";
+                    cscmList.Columns[2].Header = "组件包版本号";
+                    cscmList.Columns[3].Header = "组件包简介";
+                    cscmList.Columns[4].Header = "组件包描述";
+                    cscmList.Columns[4].Width = 375;
+                    cscmList.Columns[5].Header = "最后修改时间";
+                    cscmList.Columns[6].Header = "发布渠道";
+                    cscmList.Columns[7].Header = "作者";
+                    /*cscmList.Visibility = Visibility.Collapsed;*/
+                }
             }
 
         }
 
         private void cscmList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            
-            if(cscmList.SelectedItem == null)
+
+            if (cscmList.SelectedItem == null)
             {
 
             }
             else
             {
-                CSCMPackage package = (CSCMPackage)cscmList.SelectedItem;
-                //Debug.WriteLine((cscmList.SelectedItem as CSCMPackage).id);
-                FirstFlyout.Header = package.name;
+                CSCMPackage package;
+                if (searchPackage)
+                {
+                    //搜索的本身就是组件包
+                    package = (CSCMPackage)cscmList.SelectedItem;
+                   
+
+                }
+                else
+                {
+                    using(csdpEntities csdp = new csdpEntities())
+                    {
+                        package = csdp.CSCMPackage.Find(((CSCMDependencies)cscmList.SelectedItem).packageId);
+
+                    }
+                }
+                FirstFlyout.Header = $"{package.name} - {package.auth}";
 
                 /*cscmPackageInfo packageInfo = new cscmPackageInfo();
                 packageInfo.packageId = package.id;*/
@@ -268,7 +322,12 @@ namespace CSCM
 
 
             }
-            
+
+        }
+
+        private void findFrom_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine(findFrom.IsChecked);
         }
     }
 

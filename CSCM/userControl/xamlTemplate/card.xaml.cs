@@ -26,6 +26,7 @@ namespace CSCM.userControl.xamlTemplate
         public string name;
         public string description;
         public JArray args;
+        public double girdWidth;
         public card()
         {
             InitializeComponent();
@@ -46,6 +47,7 @@ namespace CSCM.userControl.xamlTemplate
         {
             //clearData();
             //加载数据
+           // AllGrid.Width = girdWidth;
             cscmName.Header = name;
             cscmDescription.Text = description;
             //加载变量 获取到的数据是一个Array

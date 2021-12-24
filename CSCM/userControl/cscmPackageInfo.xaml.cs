@@ -34,10 +34,10 @@ namespace CSCM.userControl
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("cscmPackageInfo....");
-           
-           
 
-            
+
+
+
         }
         public void loadData()
         {
@@ -49,15 +49,11 @@ namespace CSCM.userControl
                 foreach (CSCMDependencies dependency in dependenciesList)
                 {
                     card ca = new card();
+                    ca.AllGrid.Width = grid.Width;
                     ca.name = dependency.name;
                     ca.description = dependency.message0;
-                    cscmVersion version = (cscmVersion)csdp.cscmVersion.Where(v => v.taskId == dependency.id).OrderByDescending(v =>v.taskVersion).First();
-
-                    //JArray array = JArray.FromObject(version.args0.ToString());
-                    //Debug.WriteLine(version.args0);
-                    //Debug.WriteLine(version.args0.GetType());
-                    //Debug.WriteLine(JsonConvert.DeserializeObject(version.args0));
-                     ca.args = (JArray)JsonConvert.DeserializeObject(version.args0);
+                    cscmVersion version = (cscmVersion)csdp.cscmVersion.Where(v => v.taskId == dependency.id).OrderByDescending(v => v.taskVersion).First();
+                    ca.args = (JArray)JsonConvert.DeserializeObject(version.args0);
                     ca.LoadData();
                     cscmInfoStack.Children.Add(ca);
 

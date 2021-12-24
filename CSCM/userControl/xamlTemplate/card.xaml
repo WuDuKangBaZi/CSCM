@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CSCM.userControl.xamlTemplate"
              mc:Ignorable="d" Loaded="UserControl_Loaded" 
              >
-    <Grid Height="auto">
+    <Grid Height="auto" x:Name="AllGrid">
         <Expander x:Name="cscmName"
       HorizontalAlignment="Stretch"
       Header="获取店铺名称" Background="#FF3286D0">

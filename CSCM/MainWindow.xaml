@@ -10,7 +10,7 @@
                  Background="{DynamicResource MaterialDesignPaper}" Loaded="MetroWindow_Loaded">
     <mah:MetroWindow.Flyouts>
         <mah:FlyoutsControl>
-            <mah:Flyout x:Name="FirstFlyout" Header="Settings" Position="Right" Width="800" Background="DimGray">
+            <mah:Flyout x:Name="FirstFlyout" Header="Settings" Position="Right" Width="auto"  MaxWidth="500" Background="DimGray">
                 <usercontrol:cscmPackageInfo x:Name="cscmInfo" Background="DimGray"/>
             </mah:Flyout>
 
@@ -24,6 +24,23 @@
   VerticalContentAlignment="Top"
   Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
   materialDesign:ColorZoneAssist.Mode="Standard">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+        Height="auto"
+        Width="auto">
+                        <materialDesign:PackIcon
+          Kind="ThoughtBubbleOutline"
+          Width="24"
+          Height="24"
+          HorizontalAlignment="Center" />
+                        <TextBlock
+          Text="入门"
+          HorizontalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock Text="看咩啊?"/>
+            </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel
@@ -48,6 +65,7 @@
   Content="{materialDesign:PackIcon AccessPointRemove}"
   ToolTip="未识别的特征码" Visibility="Visible"
   IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Red" FontSize="36" Click="Button_Click" />
+                                    <TextBox IsReadOnly="True" x:Name="macBox"  HorizontalAlignment="Left" VerticalAlignment="Center"  Style="{DynamicResource MaterialDesignTextBoxBase}"/>
                                     <Button x:Name="findAuther"
   Content="{materialDesign:PackIcon AccessPoint}"
   ToolTip="已识别" Visibility="Collapsed"
@@ -56,7 +74,10 @@
   Content="{materialDesign:PackIcon ArchiveRefresh}"
   ToolTip="刷新本地目录到数据库内" Visibility="Visible"
   IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF1ADAF3" FontSize="36" Click="refreshFile_Click" />
-                                    
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3" Style="{StaticResource MaterialDesignButtonTextBlock }">组件搜索:</TextBlock>
+                                    <ToggleButton 
+  Style="{StaticResource MaterialDesignSwitchToggleButton}" 
+  ToolTip="开启则搜索组件，关闭则搜索组件包" HorizontalContentAlignment="Center" x:Name="findFrom" Click="findFrom_Click"/>
                                 </StackPanel>
                                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3" Style="{StaticResource MaterialDesignButtonTextBlock }">关键词:</TextBlock>
                                 <TextBox x:Name="searchKey" HorizontalAlignment="Left" VerticalAlignment="Center" Width="265" Cursor="IBeam" Margin="3" Style="{DynamicResource MaterialDesignTextBoxBase}" />
@@ -72,32 +93,7 @@
                     <DataGrid Height="auto" x:Name="cscmList" Margin="0,36,0,0" IsReadOnly="True" MouseDoubleClick="cscmList_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel
-        Height="auto"
-        Width="auto">
-                        <materialDesign:PackIcon
-          Kind="ClockOutline"
-          Width="24"
-          Height="24"
-          HorizontalAlignment="Center" />
-                        <TextBlock
-          Text="Recent"
-          HorizontalAlignment="Center" />
-                    </StackPanel>
-                </TabItem.Header>
-                <TextBlock>
-      <Run
-        Text="tab 2 content. Default look and behaviors." />
-      <LineBreak />
-      <LineBreak />
-      <Run
-        FontStyle="Italic">
-      Praesent sed dui arcu. Vivamus porta auctor sagittis
-    </Run>
-                </TextBlock>
-            </TabItem>
+            
             <TabItem>
                 <TabItem.Header>
                     <StackPanel
@@ -109,15 +105,12 @@
           Height="24"
           HorizontalAlignment="Center" />
                         <TextBlock
-          Text="Photos"
+          Text="成员介绍"
           HorizontalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
                 <TextBlock>
-      <Run
-        Text="tab 3 content. Default look and behaviors." />
-      <LineBreak />
-      <LineBreak />
+                    comming soon
                 </TextBlock>
             </TabItem>
             <TabItem>
@@ -126,18 +119,18 @@
         Height="auto"
         Width="auto">
                         <materialDesign:PackIcon
-          Kind="MusicBoxMultiple"
+          Kind="BookSearchOutline"
           Width="24"
           Height="24"
           HorizontalAlignment="Center" />
                         <TextBlock
-          Text="Sounds"
+          Text="知识库"
           HorizontalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
                 <TextBlock>
       <Run
-        Text="tab 4 content. Default look and behaviors." />
+        Text="comming soon" />
       <LineBreak />
       <LineBreak />
                 </TextBlock>
